@@ -7,4 +7,8 @@ class TimelineItem < ApplicationRecord
   def created?
     action == "change_status" && data["to"] == "create"
   end
+
+  def finished?
+    action == "change_status" && data["to"] == "completed"
+  end
 end
