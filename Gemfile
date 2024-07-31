@@ -60,3 +60,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "aasm", "~> 5.5"

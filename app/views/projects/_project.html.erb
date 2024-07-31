@@ -4,4 +4,9 @@
     <%= project.name %>
   </p>
 
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= project.aasm_state.titleize %>
+  </p>
+
 </div>

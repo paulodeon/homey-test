@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy start finish ]
 
   # GET /projects
   def index
@@ -43,6 +43,16 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy!
     redirect_to projects_url, notice: "Project was successfully destroyed.", status: :see_other
+  end
+
+  def start
+    @project.start!
+    redirect_to @project, notice: "Project was successfully started.", status: :see_other
+  end
+
+  def finish
+    @project.finish!
+    redirect_to @project, notice: "Project was successfully ended.", status: :see_other
   end
 
   private
