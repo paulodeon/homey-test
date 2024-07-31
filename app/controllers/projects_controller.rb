@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
+    @timelineable = @project
   end
 
   # GET /projects/new

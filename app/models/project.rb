@@ -1,6 +1,8 @@
 class Project < ApplicationRecord
   include AASM
 
+  has_many :timeline_items, as: :timelineable
+
   aasm do
     state :created, initial: true
     state :in_progress
