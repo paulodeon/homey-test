@@ -2,14 +2,29 @@
   <div class="absolute -bottom-6 left-0 top-0 flex w-6 justify-center">
     <div class="w-px bg-gray-200"></div>
   </div>
+
   <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="relative mt-3 h-6 w-6 flex-none rounded-full bg-gray-50">
+
   <div class="flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200">
     <div class="flex justify-between gap-x-4">
       <div class="py-0.5 text-xs leading-5 text-gray-500"><span class="font-medium text-gray-900"><%= timeline_item.user.name %></span> commented</div>
-      <time datetime="2023-01-23T15:56" class="flex-none py-0.5 text-xs leading-5 text-gray-500"><%= distance_of_time_in_words_to_now(timeline_item.created_at) %> ago</time>
+      <time datetime="<%= timeline_item.created_at.to_s %>" class="flex-none py-0.5 text-xs leading-5 text-gray-500"><%= distance_of_time_in_words_to_now(timeline_item.created_at) %> ago</time>
     </div>
     <div class="text-sm leading-6 text-gray-500">
       <%= timeline_item.comment %>
     </p>
   </div>
+<% elsif timeline_item.action == "change_status" %>
+  <div class="absolute -bottom-6 left-0 top-0 flex w-6 justify-center">
+    <div class="w-px bg-gray-200"></div>
+  </div>
+  <div class="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+    <div class="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
+  </div>
+  <% if timeline_item.created? %>
+    <p class="flex-auto py-0.5 text-xs leading-5 text-gray-500"><span class="font-medium text-gray-900"><%= timeline_item.user.name %></span> created the <%= timeline_item.timelineable.model_name.human %>.</p>
+  <% else %>
+    <p class="flex-auto py-0.5 text-xs leading-5 text-gray-500"><span class="font-medium text-gray-900"><%= timeline_item.user.name %></span> changed the status to <%= timeline_item.data["to"].humanize %>.</p>
+  <% end %>
+  <time datetime="<%= timeline_item.created_at.to_s %>" class="flex-none py-0.5 text-xs leading-5 text-gray-500"><%= distance_of_time_in_words_to_now(timeline_item.created_at) %> ago</time>
 <% end %>

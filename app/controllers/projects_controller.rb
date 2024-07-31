@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(project_params.merge(current_user: current_user))
 
     if @project.save
       redirect_to @project, notice: "Project was successfully created."
@@ -47,11 +47,13 @@ class ProjectsController < ApplicationController
   end
 
   def start
+    @project.current_user = current_user
     @project.start!
     redirect_to @project, notice: "Project was successfully started.", status: :see_other
   end
 
   def finish
+    @project.current_user = current_user
     @project.finish!
     redirect_to @project, notice: "Project was successfully ended.", status: :see_other
   end
